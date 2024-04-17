@@ -12,7 +12,7 @@ $pasiens = $dbh->query($query);
     <div class="container-fluid px-4">
         <div class="d-flex mt-4">
             <h3>Daftar Pasien</h3>
-            <a href="#" class="btn btn-primary ms-auto">+ Pasien</a>
+            <a href="pasien_create.php" class="btn btn-primary ms-auto">+ Pasien</a>
         </div>
 
         <table class="table mt-4">
@@ -27,24 +27,24 @@ $pasiens = $dbh->query($query);
             </tr>
 
             <?php
-            $no = 0; 
-            foreach($pasiens as $pasien):
+            $no = 0;
+            foreach ($pasiens as $pasien) :
             ?>
                 <tr>
-                    <!-- cara echo biar ga ribet pke = -->
-                    <td><?= $no += 1; ?></td>
+                    <td><?php echo $no = $no + 1; ?></td>
                     <td><?= $pasien['nama'] ?></td>
                     <td><?= $pasien['tmp_lahir'] ?></td>
                     <td><?= $pasien['tgl_lahir'] ?></td>
                     <td><?= $pasien['gender'] ?></td>
                     <td><?= $pasien['alamat'] ?></td>
+                    <td><?= $pasien['email'] ?></td>
                     <td>
-                        <a href="#" class="btn btn-primary">
+                        <a href="pasien_edit.php?id=<?= $pasien['id'] ?>" class="btn btn-primary">
                             <i class="fas fa-edit"></i>
                         </a>
-                        <a href="#" class="btn btn-danger">
+                        <a href="pasien_delete.php?id=<?= $pasien['id'] ?>" class="btn btn-danger">
                             <i class="fas fa-trash"></i>
-                            </a>
+                        </a>
                     </td>
                 </tr>
             <?php endforeach; ?>
