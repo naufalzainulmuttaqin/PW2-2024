@@ -1,22 +1,39 @@
 <?php
+$prodi = [
+    'SI' => 'Sistem Informasi', //koma itu untuk memisahkan nilai
+    'TI' => 'Teknik Informatika',
+    'BD' => 'Bisnis Digital'
+];
+
+$skills = [
+    'HTML' => 10,
+    'CSS' => 10,
+    'Javascript' => 20,
+    'RWD Bootstrap' => 20,
+    'PHP' => 30,
+    'Python' => 30,
+    'Java' => 50
+];
+
+$domisili = ['Jakarta', 'Bogor', 'Depok', 'Tanggerang', 'Bekasi', 'Lainnya'];
 include_once('top.php');
 include_once('menu.php');
 ?>
 
 <main>
     <div class="container-fluid px-4">
-        <h1 class="mt-4">Registrasi Admin Puskesmas</h1>
+        <h1 class="mt-4">Registrasi</h1>
 
         <fieldset class="my-5 border p-2">
-            <legend>Form Registrasi Admin Puskesmas</legend>
+            <legend>Form Registrasi IT Club</legend>
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-            <form action="proses_registrasi_admin_puskesmas.php" method="POST">
+            <form action="proses_registrasi.php" method="POST">
                 <div class="form-group row">
-                    <label for="nip" class="col-4 col-form-label">NIP</label>
+                    <label for="nim" class="col-4 col-form-label">NIM</label>
                     <div class="col-8">
-                        <input id="nip" name="nip" type="text" required="required" class="form-control">
+                        <input id="nim" name="nim" type="text" required="required" class="form-control">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -39,28 +56,35 @@ include_once('menu.php');
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="kota" class="col-4 col-form-label">Kota</label>
+                    <label for="prodi" class="col-4 col-form-label">Program Studi</label>
                     <div class="col-8">
-                        <select id="kota" name="kota" class="custom-select" required="required">
-                            <option value="Jakarta">Jakarta</option>
-                            <option value="Bogor">Bogor</option>
-                            <option value="Depok">Depok</option>
-                            <option value="Tanggerang">Tanggerang</option>
-                            <option value="Bekasi">Bekasi</option>
-                            <option value="Lainnya">Lainnya</option>
+                        <select id="prodi" name="prodi" class="custom-select" required="required">
+                            <!-- cara menmanggil araay asosiatif-->
+                            <?php foreach ($prodi as $key => $value) : ?>
+                                <option value="<?php echo $key ?>"><?php echo $value ?></option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="telepon" class="col-4 col-form-label">Nomor Telepon</label>
+                    <label class="col-4">Skill Web &amp; Programming</label>
                     <div class="col-8">
-                        <input id="telepon" name="telepon" type="text" class="form-control" required="required">
+                        <?php foreach ($skills as $key => $value) : ?>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input name="skill[]" id="skill<?php echo $key ?>" type="checkbox" class="custom-control-input" value="<?php echo $key ?>">
+                                <label for="skill<?php echo $key ?>" class="custom-control-label"><?php echo $key ?></label>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="alamat" class="col-4 col-form-label">Alamat</label>
+                    <label for="domisili" class="col-4 col-form-label">Domisili</label>
                     <div class="col-8">
-                        <textarea id="alamat" name="alamat" class="form-control" required="required"></textarea>
+                        <select id="domisili" name="domisili" class="custom-select" required="required">
+                            <?php foreach ($domisili as $value) : ?>
+                                <option value="<?php echo $value ?>"><?php echo $value ?></option>
+                            <?php endforeach; ?>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group row">
