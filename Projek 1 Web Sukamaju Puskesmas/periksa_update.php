@@ -1,38 +1,26 @@
 <?php
 include_once('koneksi.php');
 
-//tangkap data
-
-$id = $_POST['id'];
-$pasien_id = $_POST ['pasien_id'];                                                            
+// Tangkap data
+$id = $_POST['id']; // Pastikan Anda memiliki nilai ID yang valid dari form sebelumnya
+$pasien_id = $_POST['pasien_id'];
 $tanggal = $_POST['tanggal'];
 $berat = $_POST['berat'];
 $tinggi = $_POST['tinggi'];
 $tensi = $_POST['tensi'];
 $keterangan = $_POST['keterangan'];
 
+// Query update
+$query = "UPDATE periksa SET pasien_id=?, tanggal=?, berat=?, tinggi=?, tensi=?, keterangan=? WHERE id=?";
 
+// Persiapkan dan jalankan statement
+$stmt = $dbh->prepare($query);
+$stmt->execute([$pasien_id, $tanggal, $berat, $tinggi, $tensi, $keterangan, $id]);
 
-
-//queryinsert
-$query = "UPDATE periksa SET pasien_id='$pasien_id', tanggal='$tanggal', berat='$berat', tinggi='$tinggi', tensi='$tensi', keterangan='$keterangan' WHERE id='$id'";
-
-
-//eksekusi query
-if ($dbh->query($query)){
+// Periksa apakah proses update berhasil
+if ($stmt->rowCount() > 0) {
     header('location: periksa.php');
 } else {
-    echo "Gagal menyimpan data";
+    echo "Gagal memperbarui data";
 }
-
-
-
-
-
-
-
-
-
-
-
-?> 
+?>

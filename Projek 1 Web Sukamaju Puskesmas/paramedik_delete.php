@@ -1,31 +1,23 @@
 <?php
 include_once('koneksi.php');
 
-//tangkap data dari url
-
+// Tangkap data dari URL
 $id = $_GET['id'];
 
+// Query untuk menghapus baris-baris terkait dari tabel 'periksa'
+$query_periksa = "DELETE FROM periksa WHERE dokter_id='$id'";
 
 
-//queryinsert
-$query = "DELETE FROM paramedik WHERE id='$id'";
-
-
-//eksekusi query
-if ($dbh->query($query)){
-    header('location: paramedik.php');
+if ($dbh->query($query_periksa)) {
+    
+    $query_paramedik = "DELETE FROM paramedik WHERE id='$id'";
+    
+    if ($dbh->query($query_paramedik)) {
+        header('location: paramedik.php');
+    } else {
+        echo "Gagal menghapus data paramedik";
+    }
 } else {
-    echo "Gagal menyimpan data";
+    echo "Gagal menghapus data periksa";
 }
-
-
-
-
-
-
-
-
-
-
-
-?> 
+?>

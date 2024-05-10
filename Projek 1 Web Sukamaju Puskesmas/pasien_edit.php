@@ -89,5 +89,5 @@ include_once('menu.php');
 </main>
 
 <?php
-include_once('bottom.php');
+include_once('buttom.php');
 ?>

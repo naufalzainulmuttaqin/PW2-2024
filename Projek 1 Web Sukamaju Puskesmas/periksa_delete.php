@@ -1,23 +1,16 @@
 <?php
 include_once('koneksi.php');
 
-//tangkap data dari url
-
+// Tangkap data dari URL
 $id = $_GET['id'];
 
+// Query delete
+$query = "DELETE FROM periksa WHERE id='$id'";
 
-
-//queryinsert
-$query = "DELETE FROM periksa WHERE id_data='$id'";
-
-
-//eksekusi query
-if ($dbh->query($query)){
+// Eksekusi query
+if ($dbh->query($query)) {
     header('location: periksa.php');
 } else {
-    echo "Gagal menyimpan data";
+    echo "Gagal menghapus data";
 }
-
-
-
-?> 
+?>
